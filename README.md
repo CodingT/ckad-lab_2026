@@ -67,8 +67,8 @@ The practice labs cover the following CKAD exam topics:
 #### 1. Clone the Repository
 
 ```bash
-git clone git@github.com:CodingT/ckad-lab_2026.git
-cd 2026-CKAD
+git clone https://github.com/CodingT/ckad-lab_2026.git
+cd ckad-lab_2026
 ```
 
 #### 2. Choose a Question
@@ -128,8 +128,8 @@ Visit: [https://killercoda.com/playgrounds/scenario/kubernetes](https://killerco
 
 **Clone the repository**
 ```bash
-git clone git@github.com:CodingT/ckad-lab_2026.git
-cd 2026-CKAD
+git clone https://github.com/CodingT/ckad-lab_2026.git
+cd ckad-lab_2026
 ```
 
 #### 3. Run the Labs
