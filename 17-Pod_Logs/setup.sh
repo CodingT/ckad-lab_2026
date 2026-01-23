@@ -99,3 +99,6 @@ echo -e "${GREEN}[OK] Environment ready. Winter pod manifest created, cpu-stress
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

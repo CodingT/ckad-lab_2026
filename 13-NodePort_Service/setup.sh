@@ -47,3 +47,6 @@ echo -e "${GREEN}[OK] Environment ready. Deployment 'api-server' with label app=
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

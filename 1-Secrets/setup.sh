@@ -51,3 +51,6 @@ echo -e "${GREEN}[OK] Environment reset complete.${NC}"
 
 # Display the task description
 cat $(dirname "$0")/task.md
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

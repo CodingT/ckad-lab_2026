@@ -56,3 +56,6 @@ echo -e "${GREEN}[OK] Pod is showing authorization errors as expected.${NC}"
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

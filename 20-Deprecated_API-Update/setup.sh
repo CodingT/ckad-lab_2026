@@ -66,3 +66,6 @@ echo -e "${GREEN}[OK] Environment ready. Deployment 'web-app' created, HPA manif
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

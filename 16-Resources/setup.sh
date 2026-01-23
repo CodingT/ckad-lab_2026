@@ -36,3 +36,6 @@ echo -e "${GREEN}[OK] Environment ready. Namespace 'prod' with ResourceQuota cre
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

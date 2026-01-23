@@ -78,3 +78,6 @@ echo -e "${GREEN}[OK] Baseline deployment created without livenessProbe. Add the
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

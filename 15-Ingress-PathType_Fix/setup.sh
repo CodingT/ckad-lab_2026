@@ -43,16 +43,19 @@ spec:
   rules:
     - http:
         paths:
-          - path: /api
-            pathType: InvalidType
+          - path: /
+            pathType: ExactPath
             backend:
               service:
                 name: web-svc
                 port:
-                  number: 8080
+                  number: 80
 EOF
 
 echo -e "${GREEN}[OK] Environment ready. File /root/fix-ingress.yaml created with invalid pathType.${NC}"
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

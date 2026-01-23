@@ -48,3 +48,6 @@ echo -e "${GREEN}[OK] Baseline Deployment ready with image nginx:1.20.${NC}"
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

@@ -115,3 +115,6 @@ echo -e "${GREEN}[OK] Environment ready. Pods have wrong labels; NetworkPolicies
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

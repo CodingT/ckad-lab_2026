@@ -29,16 +29,28 @@ kubectl describe networkpolicy allow-frontend-to-backend -n network-demo
 kubectl describe networkpolicy allow-backend-to-db -n network-demo
 ```
 
-Test frontend → backend (should work)
+**Step 4 – Test connectivity**
+
+Test frontend → backend (should work):
+
+```bash
 BACKEND_IP=$(kubectl get pod backend -n network-demo -o jsonpath='{.status.podIP}')
 kubectl exec -n network-demo frontend -- wget -qO- --timeout=2 $BACKEND_IP:80
+```
 
-Test backend → database (should work)
+Test backend → database (should work):
+
+```bash
 DB_IP=$(kubectl get pod database -n network-demo -o jsonpath='{.status.podIP}')
 kubectl exec -n network-demo backend -- wget -qO- --timeout=2 $DB_IP:80
+```
 
-Test frontend → database (should FAIL - blocked by policy)
+Test frontend → database (should FAIL - blocked by policy):
+
+```bash
 kubectl exec -n network-demo frontend -- wget -qO- --timeout=2 $DB_IP:80
-# Should timeout/fail since no policy allows frontend → database directly
+```
+
+Expected result: timeout or connection refused (no policy allows frontend → database directly)
 
 

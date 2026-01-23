@@ -65,3 +65,6 @@ echo -e "${GREEN}[OK] Environment ready.${NC}"
 echo
 
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

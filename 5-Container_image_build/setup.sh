@@ -25,5 +25,8 @@ EOF
 echo -e "${GREEN}[OK] Environment ready. Build container per task instructions.${NC}"
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo
 
 

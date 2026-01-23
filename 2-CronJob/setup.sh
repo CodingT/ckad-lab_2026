@@ -11,3 +11,6 @@ echo "Environment reset complete."
 
 # Display the task description
 cat $(dirname "$0")/task.md
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

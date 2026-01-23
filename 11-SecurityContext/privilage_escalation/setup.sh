@@ -51,3 +51,6 @@ echo -e "${GREEN}[OK] Baseline deployment created without securityContext. Add s
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

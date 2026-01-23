@@ -67,3 +67,6 @@ echo -e "${GREEN}[OK] Environment ready. Deployment 'web-app' with correct label
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

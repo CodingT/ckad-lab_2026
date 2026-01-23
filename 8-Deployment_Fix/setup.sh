@@ -35,4 +35,7 @@ EOF
 echo -e "${GREEN}[OK] Broken manifest written to /root/broken-deploy.yaml${NC}"
 
 echo
-cat "$DIR/taks.md"
+cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo

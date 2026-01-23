@@ -125,3 +125,6 @@ echo -e "${GREEN}[OK] Environment ready for Question 4. Pod should show authoriz
 
 echo
 cat "$DIR/task.md"
+echo
+echo -e "${GREEN}======================================${NC}"
+echo
