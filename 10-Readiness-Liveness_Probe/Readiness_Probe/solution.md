@@ -6,7 +6,7 @@
 kubectl edit deploy api-deploy -n default
 ```
 
-Add under the container spec:
+Add the readiness probe under the container spec:
 
 ```yaml
 spec:
@@ -14,9 +14,12 @@ spec:
     spec:
       containers:
         - name: api
-          image: nginx
+          image: nginxinc/nginx-unprivileged
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nginx/conf.d
           readinessProbe:
             httpGet:
               path: /ready
@@ -31,7 +34,6 @@ Save and exit.
 
 ```bash
 kubectl rollout status deploy api-deploy -n default
-kubectl describe deploy api-deploy -n default
 ```
 
 **Step 3 – Check probe status**
@@ -39,5 +41,6 @@ kubectl describe deploy api-deploy -n default
 ```bash
 kubectl get pods -n default -l app=api-deploy
 kubectl describe pod <pod-name> -n default
-# Look for Readiness in Conditions section
 ```
+
+Look for **Readiness** in the Conditions section - it should show `True`.

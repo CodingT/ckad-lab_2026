@@ -10,4 +10,4 @@ echo "Environment reset complete."
 
 
 # Display the task description
-cat $(dirname "$0")/task.txt
+cat $(dirname "$0")/task.md

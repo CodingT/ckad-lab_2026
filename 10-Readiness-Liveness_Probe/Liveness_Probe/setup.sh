@@ -7,14 +7,14 @@ NC='\033[0m'
 set -euo pipefail
 DIR=$(dirname "$0")
 
-echo -e "${GREEN}Resetting environment for Question 10 (Readiness Probe)...${NC}"
+echo -e "${GREEN}Resetting environment for Question 10-2 (Liveness Probe)...${NC}"
 
 # Clean existing deployment and configmap
 kubectl delete deployment api-deploy -n default --ignore-not-found
 kubectl delete configmap nginx-config -n default --ignore-not-found
 sleep 2
 
-# Create ConfigMap with nginx config for port 8080 and /ready endpoint
+# Create ConfigMap with nginx config for port 8080 and /health endpoint
 kubectl apply -f - <<'EOF'
 apiVersion: v1
 kind: ConfigMap
@@ -30,14 +30,14 @@ data:
         return 200 "OK\n";
         add_header Content-Type text/plain;
       }
-      location /ready {
-        return 200 "Ready\n";
+      location /health {
+        return 200 "Healthy\n";
         add_header Content-Type text/plain;
       }
     }
 EOF
 
-# Create Deployment without readiness probe (to be fixed by student)
+# Create Deployment without liveness probe (to be fixed by student)
 kubectl apply -f - <<'EOF'
 apiVersion: apps/v1
 kind: Deployment
@@ -58,13 +58,13 @@ spec:
     spec:
       containers:
       - name: api
-        image: nginx:1.25-alpine
+        image: nginxinc/nginx-unprivileged
         ports:
         - containerPort: 8080
         volumeMounts:
         - name: config
           mountPath: /etc/nginx/conf.d
-        # readinessProbe to be added by user
+        # livenessProbe to be added by user
       volumes:
       - name: config
         configMap:
@@ -74,7 +74,7 @@ EOF
 # Wait for rollout (non-fatal if pending)
 kubectl rollout status deployment/api-deploy -n default --timeout=30s || true
 
-echo -e "${GREEN}[OK] Baseline deployment created without readinessProbe. Add the probe per task instructions.${NC}"
+echo -e "${GREEN}[OK] Baseline deployment created without livenessProbe. Add the probe per task instructions.${NC}"
 
 echo
 cat "$DIR/task.md"

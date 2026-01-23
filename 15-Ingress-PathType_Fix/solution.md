@@ -30,7 +30,7 @@ spec:
             pathType: Prefix  # Changed from InvalidType
             backend:
               service:
-                name: api-svc
+                name: api-svc  # correct service
                 port:
                   number: 8080
 ```

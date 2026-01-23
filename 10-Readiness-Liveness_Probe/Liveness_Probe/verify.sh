@@ -12,7 +12,7 @@ ERRORS=0
 NS=default
 DEP=api-deploy
 
-echo "Verifying Question 10: Readiness probe on api-deploy..."
+echo "Verifying Question 10-2: Liveness probe on api-deploy..."
 
 # --- Check deployment exists ---
 if ! kubectl get deployment "$DEP" -n "$NS" >/dev/null 2>&1; then
@@ -20,28 +20,28 @@ if ! kubectl get deployment "$DEP" -n "$NS" >/dev/null 2>&1; then
   ERRORS=$((ERRORS+1))
 fi
 
-# --- Check readiness probe ---
-RP=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].readinessProbe}' 2>/dev/null || true)
-if [ -z "$RP" ]; then
-  echo -e "${RED}[FAIL] No readinessProbe found on container 'api'.${NC}"
+# --- Check liveness probe ---
+LP=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].livenessProbe}' 2>/dev/null || true)
+if [ -z "$LP" ]; then
+  echo -e "${RED}[FAIL] No livenessProbe found on container 'api'.${NC}"
   ERRORS=$((ERRORS+1))
 else
-  PATH_VAL=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].readinessProbe.httpGet.path}' 2>/dev/null || true)
-  PORT_VAL=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].readinessProbe.httpGet.port}' 2>/dev/null || true)
-  INIT_DELAY=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].readinessProbe.initialDelaySeconds}' 2>/dev/null || true)
-  PERIOD=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].readinessProbe.periodSeconds}' 2>/dev/null || true)
+  PATH_VAL=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].livenessProbe.httpGet.path}' 2>/dev/null || true)
+  PORT_VAL=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].livenessProbe.httpGet.port}' 2>/dev/null || true)
+  INIT_DELAY=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].livenessProbe.initialDelaySeconds}' 2>/dev/null || true)
+  PERIOD=$(kubectl get deployment "$DEP" -n "$NS" -o jsonpath='{.spec.template.spec.containers[0].livenessProbe.periodSeconds}' 2>/dev/null || true)
 
-  if [ "$PATH_VAL" = "/ready" ]; then
-    echo -e "${GREEN}[OK] readinessProbe path is /ready.${NC}"
+  if [ "$PATH_VAL" = "/health" ]; then
+    echo -e "${GREEN}[OK] livenessProbe path is /health.${NC}"
   else
-    echo -e "${RED}[FAIL] readinessProbe path is '$PATH_VAL' (expected /ready).${NC}"
+    echo -e "${RED}[FAIL] livenessProbe path is '$PATH_VAL' (expected /health).${NC}"
     ERRORS=$((ERRORS+1))
   fi
 
   if [ "$PORT_VAL" = "8080" ]; then
-    echo -e "${GREEN}[OK] readinessProbe port is 8080.${NC}"
+    echo -e "${GREEN}[OK] livenessProbe port is 8080.${NC}"
   else
-    echo -e "${RED}[FAIL] readinessProbe port is '$PORT_VAL' (expected 8080).${NC}"
+    echo -e "${RED}[FAIL] livenessProbe port is '$PORT_VAL' (expected 8080).${NC}"
     ERRORS=$((ERRORS+1))
   fi
 

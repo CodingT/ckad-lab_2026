@@ -3,6 +3,6 @@
 In namespace `quetzal`, Deployment `hotfix-deploy` exists without any security context.
 
 Your task:
-1. Run with user ID 30000
+1. Run Pod with user ID 30000
 2. Privilege escalation is forbidden 
 

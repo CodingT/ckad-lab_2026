@@ -47,7 +47,7 @@ spec:
             pathType: InvalidType
             backend:
               service:
-                name: api-svc
+                name: web-svc
                 port:
                   number: 8080
 EOF

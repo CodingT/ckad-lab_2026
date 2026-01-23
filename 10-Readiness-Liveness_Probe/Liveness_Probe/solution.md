@@ -3,7 +3,7 @@
 **Step 1 – Edit the Deployment**
 
 ```bash
-kubectl edit deploy nginx -n default
+kubectl edit deploy api-deploy -n default
 ```
 
 Add under the container spec:
@@ -13,15 +13,16 @@ spec:
   template:
     spec:
       containers:
-        - name: nginx
+        - name: api
           image: nginx
           ports:
-            - containerPort: 80
-          readinessProbe:
+            - containerPort: 8080
+          livenessProbe:
             httpGet:
-              path: /ready
-              port: 80
+              path: /health
+              port: 8080
             initialDelaySeconds: 5
+            periodSeconds: 10
 ```
 
 Save and exit.
@@ -29,14 +30,14 @@ Save and exit.
 **Step 2 – Verify rollout**
 
 ```bash
-kubectl rollout status deploy nginx -n default
-kubectl describe deploy nginx -n default
+kubectl rollout status deploy api-deploy -n default
+kubectl describe deploy api-deploy -n default
 ```
 
 **Step 3 – Check probe status**
 
 ```bash
-kubectl get pods -n default -l app=nginx
+kubectl get pods -n default -l app=api-deploy
 kubectl describe pod <pod-name> -n default
-# Look for Readiness in Conditions section
+# Look for Liveness in Conditions section
 ```
